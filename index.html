@@ -264,6 +264,20 @@ a:focus-visible, button:focus-visible { outline:2px solid var(--amber); outline-
 .view.active { display:block; animation:view-in .35s ease; }
 @keyframes view-in { from{ opacity:0; transform:translateY(6px);} to{ opacity:1; transform:translateY(0);} }
 
+/* pre-paint fix so a refresh on a non-home tab doesn't flash Home first
+   (data-initial-view is set by a blocking inline script at the top of body,
+   before these elements are even parsed) */
+html[data-initial-view] #view-home { display:none; }
+html[data-initial-view] .nav-links button[data-view="home"] { border-color:transparent; }
+html[data-initial-view="services"] #view-services,
+html[data-initial-view="about"] #view-about,
+html[data-initial-view="faq"] #view-faq,
+html[data-initial-view="contact"] #view-contact { display:block; }
+html[data-initial-view="services"] .nav-links button[data-view="services"],
+html[data-initial-view="about"] .nav-links button[data-view="about"],
+html[data-initial-view="faq"] .nav-links button[data-view="faq"],
+html[data-initial-view="contact"] .nav-links button[data-view="contact"] { border-color:var(--amber); }
+
 /* floating call button */
 .float-call {
   position:fixed; bottom:1.4rem; right:1.4rem; z-index:50;
@@ -417,6 +431,14 @@ a:focus-visible, button:focus-visible { outline:2px solid var(--amber); outline-
 </style>
 </head>
 <body>
+<script>
+(function(){
+  var h = (location.hash || '#home').slice(1);
+  if (['services','about','faq','contact'].includes(h)) {
+    document.documentElement.setAttribute('data-initial-view', h);
+  }
+})();
+</script>
 <nav class="site-nav">
   <div class="wrap">
     <a class="brand" href="#" onclick="showView('home');return false;"><span class="brand-mark"></span>Site Name</a>
@@ -706,6 +728,10 @@ function flipCard(card) {
 const VALID_VIEWS = ['home', 'services', 'about', 'faq', 'contact'];
 function showView(name, updateHash) {
   if (!VALID_VIEWS.includes(name)) name = 'home';
+  // JS is now in control of routing; drop the pre-paint attribute so it
+  // doesn't fight future navigation (it forces display via a higher-specificity
+  // selector, which is only meant to matter before this script runs)
+  document.documentElement.removeAttribute('data-initial-view');
   document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
   document.getElementById('view-' + name).classList.add('active');
   document.querySelectorAll('.nav-links button').forEach(b => b.classList.toggle('active', b.dataset.view === name));
