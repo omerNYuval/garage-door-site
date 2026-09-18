@@ -354,7 +354,10 @@ a:focus-visible, button:focus-visible { outline:2px solid var(--amber); outline-
   transition: transform 0.6s cubic-bezier(.4,.2,.2,1);
   transform-style: preserve-3d;
 }
-.flip-card.flipped .flip-card-inner { transform: rotateY(180deg); }
+.flip-card.flipped .flip-card-inner,
+.flip-card:hover .flip-card-inner,
+.flip-card:focus-visible .flip-card-inner { transform: rotateY(180deg); }
+.flip-card-inner { will-change: transform; }
 
 .flip-face {
   position: absolute; inset: 0;
