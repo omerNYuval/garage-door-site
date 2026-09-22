@@ -30,10 +30,6 @@ html { scroll-behavior: smooth; }
    laptops and big monitors show the same composition, just larger or smaller.
    Below 1280px (tablets/phones) the base 16px size is kept. */
 @media (min-width: 1280px) { html { font-size: 1.25vw; } }
-@media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; }
-}
 body { margin:0; font-family: var(--font-body); color: var(--ink); background: var(--paper); line-height:1.5; -webkit-font-smoothing:antialiased; }
 h1,h2,h3 { font-family: var(--font-head); font-weight:800; line-height:1.04; letter-spacing:-0.01em; margin:0; }
 p { margin:0; max-width:62ch; }
@@ -259,9 +255,6 @@ a:focus-visible, button:focus-visible { outline:2px solid var(--amber); outline-
 @keyframes hero-kenburns {
   from { transform: scale(1) translateY(0); }
   to   { transform: scale(1.16) translateY(-2.5%); }
-}
-@media (prefers-reduced-motion: reduce) {
-  .photo-hero .bg-img { animation: none; }
 }
 .photo-hero .scrim {
   position: absolute;
@@ -905,7 +898,6 @@ function toggleFaq(btn) {
   const glow = document.getElementById('heroGlow');
   const layers = heroEl.querySelectorAll('[data-depth]');
   if (!heroEl || !bg) return;
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
   let ticking = false;
   function update() {
@@ -942,14 +934,12 @@ function toggleFaq(btn) {
 (function () {
   const nums = document.querySelectorAll('.stat-num[data-count]');
   if (!nums.length) return;
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   function format(el, value) {
     const decimals = parseInt(el.dataset.decimals || '0', 10);
     el.textContent = value.toLocaleString('en-US', { minimumFractionDigits: decimals, maximumFractionDigits: decimals }) + (el.dataset.suffix || '');
   }
   function run(el) {
     const target = parseFloat(el.dataset.count);
-    if (reduce) { format(el, target); return; }
     const duration = 1600;
     const start = performance.now();
     function step(now) {
@@ -972,7 +962,6 @@ function toggleFaq(btn) {
 /* Why-us cards: tilt toward the mouse (pointer devices only) */
 (function () {
   if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   const maxTilt = 8;
   document.querySelectorAll('.tilt-grid .card').forEach(card => {
     card.addEventListener('mousemove', (e) => {
