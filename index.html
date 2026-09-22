@@ -495,15 +495,17 @@ body {
 .card-media img, .flip-front img, .process-media img { filter: none; }
 .card-media::after, .process-media::after { display: none; }
 
-/* Cards and FAQ flip cards: coffee-brown frames */
-.card { background: #3b2a1f; border: 1px solid #6f4e37; }
-.card:hover { border-color: #a07850; }
-.flip-front { background: #3b2a1f; border: 1px solid #6f4e37; }
-.flip-front .flip-q { color: #f4efe2; }
-.flip-front .flip-hint { color: #d4af37; letter-spacing: .04em; text-transform: uppercase; font-size: .66rem; }
-.flip-back { background: #2e2118; color: #f4efe2; border: 1px solid #a07850; }
-.flip-back p { color: rgba(244,239,226,.92); }
-.flip-back .flip-hint { color: #f3dc8a; letter-spacing: .04em; text-transform: uppercase; font-size: .66rem; }
+/* Cards and FAQ flip cards: light stone frames (#d7d6d0) with dark text */
+.card { background: #d7d6d0; border: 1px solid #bdbbb3; color: #1c1b19; }
+.card:hover { border-color: #d4af37; }
+.card h3 { color: #111110; }
+.card p { color: #3a3935; }
+.flip-front { background: #d7d6d0; border: 1px solid #bdbbb3; }
+.flip-front .flip-q { color: #111110; }
+.flip-front .flip-hint { color: #7a5f14; letter-spacing: .04em; text-transform: uppercase; font-size: .66rem; }
+.flip-back { background: #c9c8c1; color: #111110; border: 1px solid #d4af37; }
+.flip-back p { color: #1c1b19; }
+.flip-back .flip-hint { color: #7a5f14; letter-spacing: .04em; text-transform: uppercase; font-size: .66rem; }
 .flip-face { box-shadow: 0 18px 40px -18px rgba(0,0,0,.8); }
 .about-block-media::after { background: linear-gradient(100deg, rgba(11,11,12,.92) 0%, rgba(11,11,12,.6) 55%, rgba(11,11,12,.35) 100%); }
 .about-closer-media::after { background: rgba(11,11,12,.6); }
