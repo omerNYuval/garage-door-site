@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>עומר יובל — Garage Door Repair</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&family=Inter:wght@400;500;600;700&family=Heebo:wght@400;700;800&display=swap" rel="stylesheet">
 <style>
 :root {
   --charcoal: #1c1e22;
@@ -19,13 +19,17 @@
   --amber-dim: #a9701f;
   --line: rgba(36,38,42,0.12);
   --line-dark: rgba(238,236,230,0.14);
-  --font-head: "Archivo", "Arial Narrow", sans-serif;
-  --font-body: "Inter", "Helvetica Neue", Arial, sans-serif;
-  --maxw: 1120px;
+  --font-head: "Archivo", "Heebo", "Arial Narrow", sans-serif;
+  --font-body: "Inter", "Heebo", "Helvetica Neue", Arial, sans-serif;
+  --maxw: 70rem;
   --gap: clamp(1.25rem, 3vw, 2.5rem);
 }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
+/* Desktop: scale the whole layout with screen width (designed at 1280px), so
+   laptops and big monitors show the same composition, just larger or smaller.
+   Below 1280px (tablets/phones) the base 16px size is kept. */
+@media (min-width: 1280px) { html { font-size: 1.25vw; } }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; }
@@ -233,7 +237,7 @@ a:focus-visible, button:focus-visible { outline:2px solid var(--amber); outline-
 /* ---------- Photo hero: depth parallax ---------- */
 .photo-hero {
   position: relative;
-  height: min(88vh, 780px);
+  height: min(88vh, 48.75rem);
   min-height: 480px;
   overflow: hidden;
   background: var(--charcoal);
