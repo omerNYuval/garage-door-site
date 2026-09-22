@@ -491,15 +491,14 @@ body {
 .float-call { background: linear-gradient(135deg, #f3dc8a 0%, #d4af37 45%, #a8812a 100%); color: #0b0b0c; }
 .site-footer { background: #0b0b0c; border-top: 1px solid rgba(212,175,55,.22); }
 .brand-mark { background: linear-gradient(180deg, #1a1a1c 0 70%, #d4af37 70% 100%); }
-/* Photos: warm gold-toned duotone so every image sits in the black & gold palette;
-   the true colours come back on hover */
+/* Photos: natural colour, toned down a touch so bright shots sit on the black background */
 .card-media img, .flip-front img, .process-media img {
-  filter: grayscale(1) sepia(.55) saturate(1.35) brightness(.78) contrast(1.08);
+  filter: brightness(.82) contrast(1.1) saturate(1.05);
   transition: filter .5s ease, transform .6s ease;
 }
-.card-media::after { background: linear-gradient(160deg, rgba(11,11,12,.35) 0%, rgba(212,175,55,.22) 100%); mix-blend-mode: multiply; transition: opacity .5s ease; }
-.card:hover .card-media img { filter: grayscale(.15) sepia(.15) brightness(.95) contrast(1.05); transform: scale(1.04); }
-.card:hover .card-media::after { opacity: .4; }
+.card-media::after { background: linear-gradient(180deg, rgba(11,11,12,0) 45%, rgba(11,11,12,.55) 100%); mix-blend-mode: normal; transition: opacity .5s ease; }
+.card:hover .card-media img { filter: brightness(.95) contrast(1.08) saturate(1.1); transform: scale(1.04); }
+.card:hover .card-media::after { opacity: .5; }
 
 /* FAQ flip cards: black front with a thin gold frame, deep bronze back */
 .flip-front { background: linear-gradient(165deg, #18171a 0%, #0d0d0f 100%); border: 1px solid rgba(212,175,55,.4); }
