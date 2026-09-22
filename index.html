@@ -230,6 +230,52 @@ a:focus-visible, button:focus-visible { outline:2px solid var(--amber); outline-
 .coverage-map iframe { position:absolute; top:0; left:0; width:100%; height:calc(100% + 60px); /* push the built-in credit bar below the clipped edge */ border:0; filter:grayscale(1) invert(.92) contrast(.9) brightness(.95); }
 .coverage-map::after { content:""; position:absolute; inset:0; pointer-events:none; box-shadow:inset 0 0 0 3px rgba(226,153,47,.0), inset 0 -60px 60px -40px rgba(28,30,34,.6); }
 
+/* ---------- Home page: black & gold theme ----------
+   Re-points the shared tokens inside the home view, so every component there
+   (cards, buttons, eyebrows, stats, map) picks up the palette automatically. */
+#view-home {
+  --charcoal: #0b0b0c;
+  --charcoal-raised: #151517;
+  --concrete: #f4efe2;
+  --panel: #131315;
+  --ink: #f4efe2;
+  --ink-soft: rgba(244,239,226,.68);
+  --paper: #0b0b0c;
+  --amber: #d4af37;
+  --amber-dim: #d4af37;
+  --line: rgba(212,175,55,.18);
+  --line-dark: rgba(212,175,55,.22);
+  --gold-grad: linear-gradient(135deg, #f3dc8a 0%, #d4af37 45%, #a8812a 100%);
+  background: var(--paper);
+  color: var(--ink);
+}
+#view-home .btn-primary { background: var(--gold-grad); color: #0b0b0c; }
+#view-home .btn-primary:hover { background: var(--gold-grad); filter: brightness(1.08); }
+#view-home .btn-ghost { border-color: rgba(212,175,55,.55); color: #f3dc8a; }
+#view-home .btn-ghost:hover { border-color: #d4af37; background: rgba(212,175,55,.08); }
+#view-home .card { border-color: var(--line); }
+#view-home .card:hover { border-color: rgba(212,175,55,.45); }
+#view-home .card-media::after { background: linear-gradient(160deg, rgba(11,11,12,.45), rgba(212,175,55,.18)); }
+#view-home .stat-num { background: var(--gold-grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+#view-home .stats-band { background: linear-gradient(180deg, #0b0b0c 0%, #121110 100%); border-bottom: 1px solid var(--line); padding-bottom: clamp(3rem,8vw,5rem); }
+#view-home .section-dark { background: #121110; }
+#view-home .photo-hero .glow {
+  background:
+    radial-gradient(38% 30% at 78% 22%, rgba(212,175,55,.24), transparent 70%),
+    radial-gradient(30% 26% at 12% 70%, rgba(212,175,55,.14), transparent 70%);
+}
+#view-home .photo-hero .scrim { background: linear-gradient(180deg, rgba(0,0,0,.55) 0%, rgba(0,0,0,.2) 38%, rgba(11,11,12,.9) 100%); }
+/* nav follows the theme while the home view is showing */
+body:has(#view-home.active) .site-nav { background: rgba(11,11,12,.92); color: #f4efe2; }
+body:has(#view-home.active) .site-nav.is-scrolled { border-color: rgba(212,175,55,.22); }
+body:has(#view-home.active) .nav-links button.active,
+body:has(#view-home.active) .nav-links button:hover { border-color: #d4af37; }
+body:has(#view-home.active) .nav-cta { background: linear-gradient(135deg, #f3dc8a 0%, #d4af37 45%, #a8812a 100%); color: #0b0b0c; }
+body:has(#view-home.active) .rail::before { background: #d4af37; }
+body:has(#view-home.active) .float-call { background: linear-gradient(135deg, #f3dc8a 0%, #d4af37 45%, #a8812a 100%); color: #0b0b0c; }
+body:has(#view-home.active) .site-footer { background: #0b0b0c; border-top: 1px solid rgba(212,175,55,.22); }
+body:has(#view-home.active) .brand-mark { background: linear-gradient(180deg, #1a1a1c 0 70%, #d4af37 70% 100%); }
+
 /* ---------- Photo hero: depth parallax ---------- */
 .photo-hero {
   position: relative;
@@ -748,7 +794,7 @@ html[data-initial-view="contact"] .nav-links button[data-view="contact"] { borde
   </div>
 </footer>
 
-<a class="float-call" href="tel:+10000000000">נ“ Call now</a>
+<a class="float-call" href="tel:+10000000000">📞 Call now</a>
 
 <script>
 const supportsHover = window.matchMedia('(hover: hover)').matches;
