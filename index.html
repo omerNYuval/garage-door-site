@@ -402,13 +402,14 @@ html[data-initial-view="contact"] .nav-links button[data-view="contact"] { borde
   transition: transform 0.6s cubic-bezier(.4,.2,.2,1);
   transform-style: preserve-3d;
 }
-.flip-card.flipped .flip-card-inner,
-.flip-card:hover .flip-card-inner,
-.flip-card:focus-visible .flip-card-inner { transform: rotateY(180deg) scale(1.12); }
+.flip-card.flipped .flip-card-inner { transform: rotateY(180deg) scale(1.12); }
+@media (hover: hover) {
+  .flip-card:hover .flip-card-inner,
+  .flip-card:focus-visible .flip-card-inner { transform: rotateY(180deg) scale(1.12); }
+}
 .flip-card-inner { will-change: transform; }
-.flip-card.flipped,
-.flip-card:hover,
-.flip-card:focus-visible { z-index: 5; }
+.flip-card.flipped { z-index: 5; }
+@media (hover: hover) { .flip-card:hover, .flip-card:focus-visible { z-index: 5; } }
 
 .flip-face {
   position: absolute; inset: 0;
@@ -759,7 +760,8 @@ body {
 #faqScatter .flip-card:nth-child(9).in-view { transform:rotate(-2.5deg); }
 #faqScatter .flip-front { box-shadow:0 24px 40px -18px rgba(0,0,0,.9); }
 #faqScatter .flip-card-inner::before { content:""; position:absolute; top:-.55rem; left:50%; width:1.1rem; height:1.1rem; margin-left:-.55rem; border-radius:50%; background:radial-gradient(circle at 35% 35%, #f3dc8a, #a8812a); box-shadow:0 3px 6px rgba(0,0,0,.6); z-index:3; transition:opacity .2s ease; }
-#faqScatter .flip-card:hover .flip-card-inner::before, #faqScatter .flip-card.flipped .flip-card-inner::before { opacity:0; }
+#faqScatter .flip-card.flipped .flip-card-inner::before { opacity:0; }
+@media (hover: hover) { #faqScatter .flip-card:hover .flip-card-inner::before { opacity:0; } }
 @media (max-width:760px){ #faqScatter .flip-card:nth-child(n){ margin-top:0; } }
 /* Size the whole board from the screen height so all 9 cards fit on one screen */
 #faqScatter.faq-scatter { font-size:min(1rem, 2.3vh); max-width:68em; margin:0 auto; column-gap:1.5em; }
@@ -797,17 +799,32 @@ body {
   .nav-links button { text-align:left; padding:.9rem .2rem; border-bottom:1px solid rgba(212,175,55,.12); }
   .nav-links button.active { border-color:rgba(212,175,55,.12); color:#f3dc8a; }
   .nav-menu-call { display:block; margin-top:1rem; text-align:center; padding:.9rem; border-radius:6px; background:var(--gold-grad); color:#0b0b0c; font-weight:700; }
-  /* sticky bottom bar instead of the floating pill */
+  /* slim bottom bar: appears once you scroll past the top, tucks away while scrolling down */
   .float-call { display:none; }
-  .mobile-bar { display:grid; grid-template-columns:1fr 1fr; gap:.6rem; position:fixed; left:0; right:0; bottom:0; z-index:60; padding:.65rem .9rem calc(.65rem + env(safe-area-inset-bottom)); background:rgba(11,11,12,.95); backdrop-filter:blur(8px); border-top:1px solid rgba(212,175,55,.3); }
-  .mobile-bar a, .mobile-bar button { display:flex; align-items:center; justify-content:center; gap:.4rem; padding:.85rem; border-radius:8px; font:inherit; font-weight:700; font-size:1rem; cursor:pointer; }
+  .mobile-bar { display:grid; grid-template-columns:auto auto; gap:.35rem; position:fixed; right:.75rem; bottom:calc(.75rem + env(safe-area-inset-bottom)); z-index:60; padding:.3rem; border-radius:999px; background:rgba(17,17,18,.92); backdrop-filter:blur(10px); border:1px solid rgba(212,175,55,.25); box-shadow:0 12px 30px -12px rgba(0,0,0,.8);
+                transform:translateY(calc(100% + 1.5rem)); transition:transform .35s cubic-bezier(.22,.61,.36,1); }
+  .mobile-bar.show { transform:none; }
+  .mobile-bar a, .mobile-bar button { display:flex; align-items:center; justify-content:center; gap:.3rem; padding:.5rem .95rem; border-radius:999px; font:inherit; font-weight:700; font-size:.82rem; cursor:pointer; }
   .mb-call { background:var(--gold-grad); color:#0b0b0c; }
-  .mb-quote { background:transparent; color:#f3dc8a; border:1px solid rgba(212,175,55,.55); }
-  body { padding-bottom:4.8rem; }
+  .mb-quote { background:transparent; color:#f3dc8a; border:1px solid rgba(212,175,55,.4); }
+  body { padding-bottom:3.5rem; }
   /* hero */
-  .photo-hero { height:auto; min-height:34rem; }
-  .photo-hero .content { padding-top:8rem; }
-  .photo-hero .content h1 { font-size:2.3rem; }
+  .photo-hero { height:auto; min-height:30rem; }
+  .photo-hero .content { padding-top:7rem; padding-bottom:2rem; }
+  .photo-hero .content h1 { font-size:2rem; max-width:none; }
+  .photo-hero .lede { font-size:.98rem; }
+  /* stats: compact 2 x 2 */
+  .stats-band { padding:1.8rem 0 2rem; }
+  .stats-grid { gap:1.3rem 1rem; }
+  .stat-num { font-size:1.9rem; }
+  .stat-label { font-size:.82rem; }
+  /* services strip on Home: swipe sideways instead of a tall stack */
+  .svc-strip .svc-row { display:flex; overflow-x:auto; scroll-snap-type:x mandatory; gap:.75rem; margin-left:-1.25rem; margin-right:-1.25rem; padding:0 1.25rem .6rem; scrollbar-width:none; }
+  .svc-strip .svc-row::-webkit-scrollbar { display:none; }
+  .svc-strip .svc-item { flex:0 0 72%; scroll-snap-align:start; }
+  .svc-head { align-items:flex-start; flex-direction:column; }
+  /* headings */
+  h2 { font-size:1.6rem !important; }
   .hero-actions .btn { flex:1 1 auto; text-align:center; }
   /* FAQ board: two cards per row, gentle tilt */
   #faqScatter.faq-scatter { font-size:1rem; max-width:none; column-gap:.9rem; row-gap:1.4rem; justify-content:center; }
@@ -817,6 +834,8 @@ body {
   #faqScatter .flip-icon { width:2.4em; height:2.4em; margin-bottom:.5em; }
   #faqScatter .flip-front .flip-q { font-size:.85em; }
   #faqScatter .flip-back p { font-size:.78em; line-height:1.4; }
+  #faqScatter .flip-card.flipped .flip-card-inner { transform:rotateY(180deg) scale(1.04); }
+  #faqScatter .flip-card { -webkit-tap-highlight-color:transparent; }
   /* services rows: image on top, full width */
   .feature-row, .feature-row:nth-of-type(even) { gap:1.2rem; margin-top:2.8rem; }
   .feature-body .btn { width:100%; text-align:center; }
@@ -1331,8 +1350,8 @@ body {
 
 <a class="float-call" href="tel:+10000000000">📞 Call now</a>
 <div class="mobile-bar" aria-label="Quick actions">
-  <a class="mb-call" data-phone-link href="tel:+10000000000">📞 Call now</a>
-  <button class="mb-quote" onclick="showView('contact')">Free quote</button>
+  <a class="mb-call" data-phone-link href="tel:+10000000000">📞 Call</a>
+  <button class="mb-quote" onclick="showView('contact')">Quote</button>
 </div>
 
 <script>
@@ -1541,6 +1560,23 @@ function bookService(value) {
       btn.disabled = false; btn.textContent = 'Send request';
     }
   });
+})();
+
+/* Phone bottom bar: appears once past the top section, tucks away while scrolling down, returns when scrolling stops */
+(function () {
+  const bar = document.querySelector('.mobile-bar');
+  if (!bar) return;
+  let lastY = window.scrollY, idle;
+  const pastTop = () => window.scrollY > window.innerHeight * 0.6;
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    if (y > lastY + 2) bar.classList.remove('show');
+    else if (y < lastY - 2 && pastTop()) bar.classList.add('show');
+    if (!pastTop()) bar.classList.remove('show');
+    lastY = y;
+    clearTimeout(idle);
+    idle = setTimeout(() => bar.classList.toggle('show', pastTop()), 350);
+  }, { passive: true });
 })();
 
 /* Home services strip: show / hide the second row */
