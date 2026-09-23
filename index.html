@@ -214,7 +214,7 @@ a:focus-visible, button:focus-visible { outline:2px solid var(--amber); outline-
 }
 .stats-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:var(--gap); }
 @media (max-width:760px){ .stats-grid{ grid-template-columns:repeat(2,1fr); } }
-.stat-num { font-family:var(--font-head); font-weight:800; font-size:clamp(1.6rem,3.2vw,2.3rem); line-height:1; color:var(--amber); font-variant-numeric:tabular-nums; }
+.stat-num { font-family:var(--font-head); font-weight:800; font-size:clamp(2.2rem,5vw,3.4rem); line-height:1; color:var(--amber); font-variant-numeric:tabular-nums; }
 .stat-label { margin-top:.5rem; font-size:.92rem; color:rgba(238,236,230,.72); }
 
 /* Why-us cards: 3D tilt toward the pointer */
@@ -616,13 +616,13 @@ body {
     </div>
   </header>
 
-  <!-- Our promises (no statistics until real numbers are available) -->
+  <!-- Business stats (numbers provided by the owner) -->
   <section class="stats-band">
     <div class="wrap stats-grid">
-      <div><div class="stat-num">Same day</div><div class="stat-label">Appointments for most repairs</div></div>
-      <div><div class="stat-num">Upfront</div><div class="stat-label">A clear price before any work</div></div>
-      <div><div class="stat-num">Local</div><div class="stat-label">Technicians based in Indianapolis</div></div>
-      <div><div class="stat-num">Guaranteed</div><div class="stat-label">Workmanship warranty on repairs</div></div>
+      <div><div class="stat-num" data-count="1487">0</div><div class="stat-label">Doors repaired</div></div>
+      <div><div class="stat-num" data-count="8" data-suffix=" yrs">0</div><div class="stat-label">Serving Indianapolis</div></div>
+      <div><div class="stat-num" data-count="4.65" data-decimals="2" data-suffix="★">0</div><div class="stat-label">Average rating</div></div>
+      <div><div class="stat-num" data-count="60" data-suffix=" min">0</div><div class="stat-label">Typical response time</div></div>
     </div>
   </section>
 
