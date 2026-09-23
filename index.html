@@ -510,6 +510,24 @@ body {
 .flip-face { box-shadow: 0 18px 40px -18px rgba(0,0,0,.8); }
 .card-icon { width:3.2rem; height:3.2rem; border-radius:50%; display:grid; place-items:center; margin-bottom:1.1rem; background:#111110; box-shadow:0 0 0 1px rgba(212,175,55,.5); }
 .card-icon svg { width:1.6rem; height:1.6rem; fill:none; stroke:#d4af37; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+/* Home: services overview strip */
+.svc-strip { padding-bottom: 0; }
+.svc-head { display:flex; justify-content:space-between; align-items:flex-end; gap:1rem; flex-wrap:wrap; }
+.svc-row { display:grid; grid-template-columns:repeat(5,1fr); gap:1rem; margin-top:2rem; }
+@media (max-width:760px){ .svc-row{ grid-template-columns:1fr 1fr; } }
+.svc-item { text-align:left; font:inherit; cursor:pointer; background:#111110; color:var(--ink); border:1px solid rgba(212,175,55,.22); border-radius:6px; padding:1.3rem 1.1rem; display:flex; flex-direction:column; gap:.35rem; transition:border-color .25s ease, transform .25s ease, background .25s ease; }
+.svc-item:hover { border-color:#d4af37; transform:translateY(-4px); background:#161512; }
+.svc-item strong { font-size:.98rem; color:#f4efe2; margin-top:.4rem; }
+.svc-item > span:last-child { font-size:.82rem; color:var(--ink-soft); }
+.svc-icon svg { width:1.9rem; height:1.9rem; fill:none; stroke:#d4af37; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; }
+/* Home: how it works */
+.how-row { display:grid; grid-template-columns:repeat(3,1fr); gap:var(--gap); margin-top:2.5rem; position:relative; }
+.how-row::before { content:""; position:absolute; top:1.6rem; left:1.6rem; right:1.6rem; height:1px; background:linear-gradient(90deg, #d4af37, rgba(212,175,55,.15)); }
+@media (max-width:760px){ .how-row{ grid-template-columns:1fr; } .how-row::before{ display:none; } }
+.how-step { position:relative; }
+.how-num { width:3.2rem; height:3.2rem; border-radius:50%; display:grid; place-items:center; background:var(--gold-grad); color:#0b0b0c; font-family:var(--font-head); font-weight:800; font-size:1.05rem; position:relative; }
+.how-step h3 { margin-top:1.1rem; font-size:1.12rem; color:#f4efe2; font-family:var(--font-body); font-weight:700; }
+.how-step p { margin-top:.45rem; color:var(--ink-soft); font-size:.95rem; max-width:30ch; }
 /* smaller FAQ cards: shrink the contents to match */
 .flip-face { padding: 1rem; }
 .flip-front .flip-q { font-size: .76rem; }
@@ -570,6 +588,26 @@ body {
     </div>
   </section>
 
+  <!-- Services overview (links to the Services page) -->
+  <section class="svc-strip">
+    <div class="wrap reveal">
+      <div class="svc-head">
+        <div>
+          <p class="eyebrow">What we fix</p>
+          <h2 style="font-size:clamp(1.6rem,3.4vw,2.3rem); margin-top:.5rem;">Every part of your garage door</h2>
+        </div>
+        <button class="btn btn-ghost" onclick="showView('services')">All services →</button>
+      </div>
+      <div class="svc-row">
+        <button class="svc-item" onclick="showView('services')"><span class="svc-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg></span><strong>Emergency repair</strong><span>Stuck, off-track or won't close</span></button>
+        <button class="svc-item" onclick="showView('services')"><span class="svc-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6c4 0 4 3 8 3s4-3 8-3M4 12c4 0 4 3 8 3s4-3 8-3M4 18c4 0 4 3 8 3"/></svg></span><strong>Springs &amp; cables</strong><span>Broken spring or snapped cable</span></button>
+        <button class="svc-item" onclick="showView('services')"><span class="svc-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="7" width="18" height="10" rx="2"/><path d="M7 12h4M16 12h1"/></svg></span><strong>Openers</strong><span>Repair, replace, smart openers</span></button>
+        <button class="svc-item" onclick="showView('services')"><span class="svc-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 21V9l9-6 9 6v12"/><path d="M7 21v-8h10v8M7 16h10"/></svg></span><strong>New installation</strong><span>New doors, fitted and finished</span></button>
+        <button class="svc-item" onclick="showView('services')"><span class="svc-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.5-2.5z"/></svg></span><strong>Tune-up</strong><span>Rollers, tracks, safety check</span></button>
+      </div>
+    </div>
+  </section>
+
   <section>
     <div class="wrap reveal">
       <p class="eyebrow">Why us</p>
@@ -578,6 +616,19 @@ body {
         <div class="card"><div class="card-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><h3>Same-day service</h3><p>Most repairs are scheduled and finished the day you call — no waiting a week for a technician.</p></div>
         <div class="card"><div class="card-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.6 13.4l-7.2 7.2a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg></div><h3>Upfront, honest pricing</h3><p>You get a clear quote before any work starts, with no surprise fees tacked onto the invoice.</p></div>
         <div class="card"><div class="card-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg></div><h3>Warrantied workmanship</h3><p>Every repair is backed by our workmanship warranty, so you're covered long after we leave.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works: 3 steps -->
+  <section class="how-section">
+    <div class="wrap reveal">
+      <p class="eyebrow">How it works</p>
+      <h2 style="font-size:clamp(1.6rem,3.4vw,2.3rem); margin-top:.5rem;">Fixed in three simple steps</h2>
+      <div class="how-row">
+        <div class="how-step"><span class="how-num">01</span><h3>Call or book online</h3><p>Tell us what's wrong. We'll give you a time window the same day.</p></div>
+        <div class="how-step"><span class="how-num">02</span><h3>A technician arrives</h3><p>A local tech diagnoses the problem and quotes the price before any work.</p></div>
+        <div class="how-step"><span class="how-num">03</span><h3>Your door works again</h3><p>Most repairs are finished in one visit, backed by our warranty.</p></div>
       </div>
     </div>
   </section>
