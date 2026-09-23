@@ -788,11 +788,14 @@ body {
   .site-nav .wrap { padding:.8rem 1.1rem; }
   .brand { font-size:1rem; white-space:nowrap; }
   .nav-cta { display:none; }
-  .nav-toggle { display:flex; flex-direction:column; justify-content:center; gap:5px; width:2.75rem; height:2.75rem; border:1px solid rgba(212,175,55,.45); border-radius:8px; background:transparent; cursor:pointer; padding:0 .7rem; }
-  .nav-toggle span { display:block; height:2px; background:#d4af37; border-radius:2px; transition:transform .3s ease, opacity .2s ease; }
-  .nav-open .nav-toggle span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+  .nav-toggle { -webkit-appearance:none; appearance:none; position:relative; display:block; width:2.75rem; height:2.75rem; border:1px solid rgba(212,175,55,.45); border-radius:8px; background:transparent; cursor:pointer; padding:0; }
+  /* fixed-size bars, absolutely placed: Safari gives flex children inside a <button> zero width */
+  .nav-toggle span { position:absolute; left:50%; top:50%; width:1.3rem; height:2px; margin-left:-.65rem; background:#d4af37; border-radius:2px; transition:transform .3s ease, opacity .2s ease; }
+  .nav-toggle span:nth-child(1) { transform:translateY(-7px); }
+  .nav-toggle span:nth-child(3) { transform:translateY(7px); }
+  .nav-open .nav-toggle span:nth-child(1) { transform:rotate(45deg); }
   .nav-open .nav-toggle span:nth-child(2) { opacity:0; }
-  .nav-open .nav-toggle span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+  .nav-open .nav-toggle span:nth-child(3) { transform:rotate(-45deg); }
   .nav-links { position:absolute; top:100%; left:0; right:0; flex-direction:column; gap:0; background:rgba(11,11,12,.98); border-bottom:1px solid rgba(212,175,55,.3); padding:.5rem 1.1rem 1.2rem; font-size:1.1rem;
                clip-path:inset(0 0 100% 0); opacity:0; pointer-events:none; transition:clip-path .35s ease, opacity .25s ease; }
   .nav-open .nav-links { clip-path:inset(0 0 0 0); opacity:1; pointer-events:auto; }
