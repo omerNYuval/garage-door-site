@@ -543,6 +543,21 @@ body {
 .about-block.reveal.in-view .tl-item:nth-child(2) { animation-delay:.12s; }
 .about-block.reveal.in-view .tl-item:nth-child(3) { animation-delay:.24s; }
 .about-block.reveal.in-view .tl-item:nth-child(4) { animation-delay:.36s; }
+/* Home: reviews */
+.reviews-head { display:flex; justify-content:space-between; align-items:flex-end; gap:1rem; flex-wrap:wrap; }
+.sample-tag { font-size:.75rem; font-weight:700; letter-spacing:.04em; color:#f3dc8a; border:1px dashed rgba(212,175,55,.6); border-radius:999px; padding:.35rem .8rem; }
+.reviews-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:var(--gap); margin-top:2.5rem; }
+@media (max-width:760px){ .reviews-grid{ grid-template-columns:1fr; } }
+.review { margin:0; background:linear-gradient(165deg,#151412 0%,#0f0e0d 100%); border:1px solid rgba(212,175,55,.25); border-radius:8px; padding:1.8rem 1.6rem; display:flex; flex-direction:column; gap:1.1rem; position:relative; transition:border-color .25s ease, transform .25s ease; }
+.review:hover { border-color:#d4af37; transform:translateY(-4px); }
+.review::before { content:"“"; position:absolute; top:.2rem; right:1.2rem; font-family:Georgia,serif; font-size:5rem; line-height:1; color:rgba(212,175,55,.14); }
+.review-stars { display:flex; gap:.2rem; }
+.review-stars svg { width:1.1rem; height:1.1rem; fill:#d4af37; }
+.review blockquote { margin:0; color:#f4efe2; font-size:1rem; line-height:1.6; flex:1; }
+.review figcaption { display:flex; align-items:center; gap:.75rem; }
+.review-avatar { width:2.4rem; height:2.4rem; border-radius:50%; display:grid; place-items:center; background:var(--gold-grad); color:#0b0b0c; font-weight:800; }
+.review figcaption strong { display:block; color:#f4efe2; font-size:.92rem; }
+.review figcaption span span { display:block; color:var(--ink-soft); font-size:.8rem; }
 /* Home: how it works */
 .how-row { display:grid; grid-template-columns:repeat(3,1fr); gap:var(--gap); margin-top:2.5rem; position:relative; }
 .how-row::before { content:""; position:absolute; top:1.6rem; left:1.6rem; right:1.6rem; height:1px; background:linear-gradient(90deg, #d4af37, rgba(212,175,55,.15)); }
@@ -663,6 +678,36 @@ body {
         <div class="how-step"><span class="how-num">01</span><h3>Call or book online</h3><p>Tell us what's wrong. We'll give you a time window the same day.</p></div>
         <div class="how-step"><span class="how-num">02</span><h3>A technician arrives</h3><p>A local tech diagnoses the problem and quotes the price before any work.</p></div>
         <div class="how-step"><span class="how-num">03</span><h3>Your door works again</h3><p>Most repairs are finished in one visit, backed by our warranty.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reviews. SAMPLE CONTENT ONLY: replace with real customer reviews before merging to the live site -->
+  <section class="reviews-section">
+    <div class="wrap reveal">
+      <div class="reviews-head">
+        <div>
+          <p class="eyebrow">Reviews</p>
+          <h2 style="font-size:clamp(1.6rem,3.4vw,2.3rem); margin-top:.5rem;">What our customers say</h2>
+        </div>
+        <span class="sample-tag">Sample reviews: replace before publishing</span>
+      </div>
+      <div class="reviews-grid">
+        <figure class="review">
+          <div class="review-stars" aria-label="5 out of 5 stars"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg></div>
+          <blockquote>“Our spring snapped on a Sunday morning. They had someone out by noon, explained everything, and the price was exactly what they quoted on the phone.”</blockquote>
+          <figcaption><span class="review-avatar">S</span><span><strong>Sample Customer</strong><span>Fishers, IN</span></span></figcaption>
+        </figure>
+        <figure class="review">
+          <div class="review-stars" aria-label="5 out of 5 stars"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg></div>
+          <blockquote>“Honest and fast. The tech told me I didn't need a new opener, just a new sensor. Saved me a few hundred dollars.”</blockquote>
+          <figcaption><span class="review-avatar">S</span><span><strong>Sample Customer</strong><span>Carmel, IN</span></span></figcaption>
+        </figure>
+        <figure class="review">
+          <div class="review-stars" aria-label="5 out of 5 stars"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg></div>
+          <blockquote>“Installed a new insulated door and a smart opener. Clean work, on time, and they walked me through the app before leaving.”</blockquote>
+          <figcaption><span class="review-avatar">S</span><span><strong>Sample Customer</strong><span>Broad Ripple, IN</span></span></figcaption>
+        </figure>
       </div>
     </div>
   </section>
