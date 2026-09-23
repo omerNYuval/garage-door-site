@@ -683,6 +683,19 @@ body {
 #faqScatter .flip-card-inner::before { content:""; position:absolute; top:-.55rem; left:50%; width:1.1rem; height:1.1rem; margin-left:-.55rem; border-radius:50%; background:radial-gradient(circle at 35% 35%, #f3dc8a, #a8812a); box-shadow:0 3px 6px rgba(0,0,0,.6); z-index:3; transition:opacity .2s ease; }
 #faqScatter .flip-card:hover .flip-card-inner::before, #faqScatter .flip-card.flipped .flip-card-inner::before { opacity:0; }
 @media (max-width:760px){ #faqScatter .flip-card:nth-child(n){ margin-top:0; } }
+/* Size the whole board from the screen height so all 9 cards fit on one screen */
+#faqScatter.faq-scatter { font-size:min(1rem, 2.3vh); max-width:68em; margin:0 auto; column-gap:1.5em; }
+#faqScatter .flip-card { font-size:1em; width:11.8em; height:11.8em; }
+#faqScatter .flip-face { padding:1em; }
+#faqScatter .flip-front .flip-q { font-size:.78em; }
+#faqScatter .flip-back p { font-size:.72em; }
+#faqScatter .flip-hint, #faqScatter .flip-front .flip-hint, #faqScatter .flip-back .flip-hint { font-size:.56em; }
+#faqScatter .flip-icon { width:2.8em; height:2.8em; margin-bottom:.7em; }
+#faqScatter .flip-icon svg { width:1.4em; height:1.4em; }
+#faqScatter .flip-card:nth-child(2), #faqScatter .flip-card:nth-child(4), #faqScatter .flip-card:nth-child(7), #faqScatter .flip-card:nth-child(9) { margin-top:2.2em; }
+#faqScatter.faq-scatter { row-gap:3vh; padding-top:2vh; padding-bottom:3vh; }
+#faqScatter .flip-card-inner::before { width:1em; height:1em; margin-left:-.5em; top:-.5em; }
+
 .faq-art { max-width:11rem; }
 .faq-dot { fill:#d4af37; opacity:0; animation:glow-in .4s ease 1.2s forwards; }
 
