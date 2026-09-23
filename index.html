@@ -822,7 +822,12 @@ body {
   .feature-body .btn { width:100%; text-align:center; }
   /* shorter section spacing */
   section { padding:3rem 0; }
-  .svc-hero-art { display:none; }
+  /* keep the animated gold header illustrations on phones: title left, art right */
+  .svc-hero-grid { grid-template-columns:1fr auto; gap:1rem; align-items:center; }
+  .svc-hero-art .door-art { max-width:7.5rem; margin:0; }
+  .svc-hero-art .faq-art, .svc-hero-art .contact-art { max-width:6.5rem; }
+  .svc-hero h1 { font-size:1.7rem; }
+  .svc-hero .lede { grid-column:1 / -1; }
   .cta-inner { flex-direction:column; align-items:stretch; text-align:left; }
   .cta-btn { width:100%; }
 }
