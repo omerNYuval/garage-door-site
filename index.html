@@ -778,6 +778,54 @@ body {
 .faq-dot { fill:#d4af37; opacity:0; animation:glow-in .4s ease 1.2s forwards; }
 
 
+
+/* ---------- Phones (up to 760px): same design, laid out for a narrow screen ---------- */
+.nav-toggle, .nav-menu-call, .mobile-bar { display:none; }
+@media (max-width:760px) {
+  html { -webkit-text-size-adjust:100%; }
+  .site-nav .wrap { padding:.8rem 1.1rem; }
+  .brand { font-size:1rem; white-space:nowrap; }
+  .nav-cta { display:none; }
+  .nav-toggle { display:flex; flex-direction:column; justify-content:center; gap:5px; width:2.75rem; height:2.75rem; border:1px solid rgba(212,175,55,.45); border-radius:8px; background:transparent; cursor:pointer; padding:0 .7rem; }
+  .nav-toggle span { display:block; height:2px; background:#d4af37; border-radius:2px; transition:transform .3s ease, opacity .2s ease; }
+  .nav-open .nav-toggle span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+  .nav-open .nav-toggle span:nth-child(2) { opacity:0; }
+  .nav-open .nav-toggle span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+  .nav-links { position:absolute; top:100%; left:0; right:0; flex-direction:column; gap:0; background:rgba(11,11,12,.98); border-bottom:1px solid rgba(212,175,55,.3); padding:.5rem 1.1rem 1.2rem; font-size:1.1rem;
+               clip-path:inset(0 0 100% 0); opacity:0; pointer-events:none; transition:clip-path .35s ease, opacity .25s ease; }
+  .nav-open .nav-links { clip-path:inset(0 0 0 0); opacity:1; pointer-events:auto; }
+  .nav-links button { text-align:left; padding:.9rem .2rem; border-bottom:1px solid rgba(212,175,55,.12); }
+  .nav-links button.active { border-color:rgba(212,175,55,.12); color:#f3dc8a; }
+  .nav-menu-call { display:block; margin-top:1rem; text-align:center; padding:.9rem; border-radius:6px; background:var(--gold-grad); color:#0b0b0c; font-weight:700; }
+  /* sticky bottom bar instead of the floating pill */
+  .float-call { display:none; }
+  .mobile-bar { display:grid; grid-template-columns:1fr 1fr; gap:.6rem; position:fixed; left:0; right:0; bottom:0; z-index:60; padding:.65rem .9rem calc(.65rem + env(safe-area-inset-bottom)); background:rgba(11,11,12,.95); backdrop-filter:blur(8px); border-top:1px solid rgba(212,175,55,.3); }
+  .mobile-bar a, .mobile-bar button { display:flex; align-items:center; justify-content:center; gap:.4rem; padding:.85rem; border-radius:8px; font:inherit; font-weight:700; font-size:1rem; cursor:pointer; }
+  .mb-call { background:var(--gold-grad); color:#0b0b0c; }
+  .mb-quote { background:transparent; color:#f3dc8a; border:1px solid rgba(212,175,55,.55); }
+  body { padding-bottom:4.8rem; }
+  /* hero */
+  .photo-hero { height:auto; min-height:34rem; }
+  .photo-hero .content { padding-top:8rem; }
+  .photo-hero .content h1 { font-size:2.3rem; }
+  .hero-actions .btn { flex:1 1 auto; text-align:center; }
+  /* FAQ board: two cards per row, gentle tilt */
+  #faqScatter.faq-scatter { font-size:1rem; max-width:none; column-gap:.9rem; row-gap:1.4rem; justify-content:center; }
+  #faqScatter .flip-card { width:calc(50% - .5rem); height:auto; aspect-ratio:1; font-size:.9rem; }
+  #faqScatter .flip-card:nth-child(n) { margin-top:0; }
+  #faqScatter .flip-face { padding:.7rem; }
+  #faqScatter .flip-icon { width:2.4em; height:2.4em; margin-bottom:.5em; }
+  #faqScatter .flip-front .flip-q { font-size:.85em; }
+  #faqScatter .flip-back p { font-size:.78em; line-height:1.4; }
+  /* services rows: image on top, full width */
+  .feature-row, .feature-row:nth-of-type(even) { gap:1.2rem; margin-top:2.8rem; }
+  .feature-body .btn { width:100%; text-align:center; }
+  /* shorter section spacing */
+  section { padding:3rem 0; }
+  .svc-hero-art { display:none; }
+  .cta-inner { flex-direction:column; align-items:stretch; text-align:left; }
+  .cta-btn { width:100%; }
+}
 </style>
 </head>
 <body>
@@ -792,13 +840,15 @@ body {
 <nav class="site-nav">
   <div class="wrap">
     <a class="brand" href="#" onclick="showView('home');return false;"><span class="brand-mark"></span>עומר יובל</a>
-    <div class="nav-links">
+    <div class="nav-links" id="navLinks">
       <button data-view="home" class="active" onclick="showView('home')">Home</button>
       <button data-view="services" onclick="showView('services')">Services</button>
       <button data-view="faq" onclick="showView('faq')">FAQ</button>
       <button data-view="contact" onclick="showView('contact')">Contact</button>
+      <a class="nav-menu-call" data-phone-link href="tel:+10000000000">Call now</a>
     </div>
     <a class="nav-cta" href="#" onclick="showView('contact');return false;">Call for service</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks" onclick="toggleNav()"><span></span><span></span><span></span></button>
   </div>
 </nav>
 <div class="rail"></div>
@@ -1275,6 +1325,10 @@ body {
 </footer>
 
 <a class="float-call" href="tel:+10000000000">📞 Call now</a>
+<div class="mobile-bar" aria-label="Quick actions">
+  <a class="mb-call" data-phone-link href="tel:+10000000000">📞 Call now</a>
+  <button class="mb-quote" onclick="showView('contact')">Free quote</button>
+</div>
 
 <script>
 const supportsHover = window.matchMedia('(hover: hover)').matches;
@@ -1299,6 +1353,15 @@ function applyViewMeta(name) {
   document.querySelector('meta[name="description"]').setAttribute('content', m[1] || DEFAULT_DESC);
 }
 
+/* Phone menu */
+function toggleNav(force) {
+  const nav = document.querySelector('.site-nav');
+  const open = typeof force === 'boolean' ? force : !nav.classList.contains('nav-open');
+  nav.classList.toggle('nav-open', open);
+  const t = document.getElementById('navToggle');
+  if (t) { t.setAttribute('aria-expanded', String(open)); t.setAttribute('aria-label', open ? 'Close menu' : 'Open menu'); }
+}
+
 const VALID_VIEWS = ['home', 'services', 'faq', 'contact'];
 function showView(name, updateHash) {
   if (!VALID_VIEWS.includes(name)) name = 'home';
@@ -1309,6 +1372,7 @@ function showView(name, updateHash) {
   document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
   document.getElementById('view-' + name).classList.add('active');
   applyViewMeta(name);
+  toggleNav(false);
   document.querySelectorAll('.nav-links button').forEach(b => b.classList.toggle('active', b.dataset.view === name));
   window.scrollTo({ top: 0, behavior: 'instant' in window ? 'instant' : 'auto' });
   if (updateHash !== false) {
