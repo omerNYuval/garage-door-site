@@ -823,11 +823,28 @@ body {
   .stats-grid { gap:1.3rem 1rem; }
   .stat-num { font-size:1.9rem; }
   .stat-label { font-size:.82rem; }
-  /* services strip on Home: swipe sideways instead of a tall stack */
-  .svc-strip .svc-row { display:flex; overflow-x:auto; scroll-snap-type:x mandatory; gap:.75rem; margin-left:-1.25rem; margin-right:-1.25rem; padding:0 1.25rem .6rem; scrollbar-width:none; }
-  .svc-strip .svc-row::-webkit-scrollbar { display:none; }
-  .svc-strip .svc-item { flex:0 0 72%; scroll-snap-align:start; }
-  .svc-head { align-items:flex-start; flex-direction:column; }
+  /* services strip on Home: compact 2-column tiles, "More services" button under the cards */
+  .svc-strip .wrap { display:flex; flex-direction:column; }
+  .svc-head { display:contents; }
+  .svc-toggle { margin-top:1rem; align-self:stretch; text-align:center; }
+  .svc-strip .svc-row { order:1; display:grid; grid-template-columns:1fr 1fr; gap:.6rem; margin-top:1.3rem; }
+  .svc-more { order:2; }
+  .svc-more .svc-row { margin-top:.6rem; }
+  .svc-toggle { order:3; }
+  .svc-strip .svc-item { padding:.85rem .8rem; gap:.2rem; border-radius:10px; }
+  .svc-strip .svc-item strong { font-size:.86rem; margin-top:.3rem; }
+  .svc-strip .svc-item > span:last-child { font-size:.74rem; line-height:1.35; }
+  .svc-strip .svc-icon svg { width:1.4rem; height:1.4rem; }
+  .svc-strip .svc-item:hover { transform:none; }
+  /* an odd last tile spans the full width so there is no gap next to it */
+  .svc-strip .svc-row .svc-item:last-child:nth-child(odd) { grid-column:1 / -1; }
+  /* Why-us cards: icon beside the title, less padding */
+  .grid-3 { gap:.8rem; margin-top:1.5rem; }
+  .grid-3 .card { display:grid; grid-template-columns:auto 1fr; column-gap:.9rem; align-items:center; padding:1rem 1.1rem; }
+  .grid-3 .card .card-icon { width:2.6rem; height:2.6rem; margin:0; grid-row:span 1; }
+  .grid-3 .card .card-icon svg { width:1.3rem; height:1.3rem; }
+  .grid-3 .card h3 { font-size:1rem; }
+  .grid-3 .card p { grid-column:1 / -1; margin-top:.5rem; font-size:.88rem; line-height:1.5; }
   /* headings */
   h2 { font-size:1.6rem !important; }
   .hero-actions .btn { flex:1 1 auto; text-align:center; }
