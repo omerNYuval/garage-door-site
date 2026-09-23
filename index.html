@@ -54,7 +54,7 @@ p { margin:0; max-width:62ch; }
 a { color:inherit; text-decoration:none; }
 .wrap { max-width: var(--maxw); margin:0 auto; padding:0 clamp(1.25rem,4vw,2.5rem); }
 
-.site-nav { position:sticky; top:0; z-index:40; background:rgba(238,236,230,0.92); backdrop-filter:blur(8px); border-bottom:1px solid transparent; transition:border-color .25s ease, box-shadow .25s ease; }
+.site-nav { position:sticky; top:0; z-index:40; background:rgba(238,236,230,0.92); -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px); border-bottom:1px solid transparent; transition:border-color .25s ease, box-shadow .25s ease; }
 .site-nav.is-scrolled { border-color:var(--line); box-shadow:0 6px 18px -14px rgba(0,0,0,0.4); }
 .site-nav .wrap { display:flex; align-items:center; justify-content:space-between; padding:1rem clamp(1.25rem,4vw,2.5rem); }
 .brand { font-family:var(--font-head); font-weight:800; font-size:1.05rem; display:flex; align-items:center; gap:.55rem; }
@@ -400,6 +400,7 @@ html[data-initial-view="contact"] .nav-links button[data-view="contact"] { borde
   position: relative;
   width: 100%; height: 100%;
   transition: transform 0.6s cubic-bezier(.4,.2,.2,1);
+  -webkit-transform-style: preserve-3d;
   transform-style: preserve-3d;
 }
 .flip-card.flipped .flip-card-inner { transform: rotateY(180deg) scale(1.12); }
@@ -413,6 +414,7 @@ html[data-initial-view="contact"] .nav-links button[data-view="contact"] { borde
 
 .flip-face {
   position: absolute; inset: 0;
+  -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   border-radius: 10px;
   display: flex;
@@ -652,17 +654,17 @@ body {
 .svc-hero h1 { color:#f4efe2; font-size:clamp(1.8rem,3.4vw,2.6rem); margin-top:.4rem; max-width:none !important; }
 .svc-hero .lede { color:rgba(244,239,226,.78); margin-top:.8rem; max-width:44ch; font-size:.98rem; }
 .door-art { width:100%; max-width:16rem; height:auto; overflow:visible; display:block; margin:0 auto; }
-.door-art .draw { fill:none; stroke:#d4af37; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; stroke-dasharray:1; stroke-dashoffset:1; animation:door-draw 1.3s cubic-bezier(.4,.1,.2,1) forwards; }
+.door-art .draw { fill:none; stroke:#d4af37; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; stroke-dasharray:var(--len,1); stroke-dashoffset:var(--len,1); animation:door-draw 1.3s cubic-bezier(.4,.1,.2,1) forwards; }
 .door-art .soft { stroke-width:1.2; stroke-opacity:.6; animation-delay:.35s; }
 .door-art .win { stroke:#f3dc8a; animation-delay:.55s; }
 @keyframes door-draw { to { stroke-dashoffset:0; } }
-.door-panels { animation:door-open 1.9s cubic-bezier(.65,0,.25,1) 1.5s forwards; }
+.door-panels { transform-box:view-box; animation:door-open 1.9s cubic-bezier(.65,0,.25,1) 1.5s forwards; }
 @keyframes door-open { to { transform:translateY(-150px); } }
 .door-glow { opacity:0; animation:glow-in 1.8s ease 1.9s forwards; }
 @keyframes glow-in { to { opacity:1; } }
 /* Contact page */
 .contact-art { max-width:11rem; }
-.contact-art .ring { transform-origin:100px 100px; animation:phone-ring 2.6s ease-in-out 1.4s infinite; }
+.contact-art .ring { transform-box:view-box; transform-origin:100px 100px; animation:phone-ring 2.6s ease-in-out 1.4s infinite; }
 @keyframes phone-ring { 0%,70%,100% { transform:rotate(0); } 74% { transform:rotate(-9deg); } 78% { transform:rotate(8deg); } 82% { transform:rotate(-6deg); } 86% { transform:rotate(4deg); } 90% { transform:rotate(0); } }
 .contact-art .wave { animation:door-draw 1.3s cubic-bezier(.4,.1,.2,1) forwards, wave-pulse 2.6s ease-in-out 1.4s infinite; }
 @keyframes wave-pulse { 0%,65%,100% { opacity:.25; } 75%,90% { opacity:1; } }
@@ -804,7 +806,7 @@ body {
   .nav-menu-call { display:block; margin-top:1rem; text-align:center; padding:.9rem; border-radius:6px; background:var(--gold-grad); color:#0b0b0c; font-weight:700; }
   /* slim bottom bar: appears once you scroll past the top, tucks away while scrolling down */
   .float-call { display:none; }
-  .mobile-bar { display:grid; grid-template-columns:auto auto; gap:.35rem; position:fixed; right:.75rem; bottom:calc(.75rem + env(safe-area-inset-bottom)); z-index:60; padding:.3rem; border-radius:999px; background:rgba(17,17,18,.92); backdrop-filter:blur(10px); border:1px solid rgba(212,175,55,.25); box-shadow:0 12px 30px -12px rgba(0,0,0,.8);
+  .mobile-bar { display:grid; grid-template-columns:auto auto; gap:.35rem; position:fixed; right:.75rem; bottom:calc(.75rem + env(safe-area-inset-bottom)); z-index:60; padding:.3rem; border-radius:999px; background:rgba(17,17,18,.92); -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px); border:1px solid rgba(212,175,55,.25); box-shadow:0 12px 30px -12px rgba(0,0,0,.8);
                 transform:translateY(calc(100% + 1.5rem)); transition:transform .35s cubic-bezier(.22,.61,.36,1); }
   .mobile-bar.show { transform:none; }
   .mobile-bar a, .mobile-bar button { display:flex; align-items:center; justify-content:center; gap:.3rem; padding:.5rem .95rem; border-radius:999px; font:inherit; font-weight:700; font-size:.82rem; cursor:pointer; }
@@ -1380,6 +1382,26 @@ function applyViewMeta(name) {
   document.querySelector('meta[name="description"]').setAttribute('content', m[1] || DEFAULT_DESC);
 }
 
+/* Gold line drawings: use each line's measured length, so the "drawing" effect works the same in
+   Safari (which can ignore pathLength), and make lines fully solid once the animation finishes */
+(function () {
+  document.querySelectorAll('svg .draw').forEach(el => {
+    let len = 0;
+    try { len = el.getTotalLength(); } catch (_) {}
+    if (!len) {
+      const t = el.tagName.toLowerCase();
+      if (t === 'circle') len = 2 * Math.PI * el.r.baseVal.value;
+      else if (t === 'rect') len = 2 * (el.width.baseVal.value + el.height.baseVal.value);
+    }
+    if (len) {
+      el.removeAttribute('pathLength');
+      el.style.strokeDasharray = len;
+      el.style.setProperty('--len', len);
+    }
+    el.addEventListener('animationend', (e) => { if (e.animationName === 'door-draw') el.style.strokeDasharray = 'none'; });
+  });
+})();
+
 /* Phone menu */
 function toggleNav(force) {
   const nav = document.querySelector('.site-nav');
@@ -1454,7 +1476,7 @@ showView((location.hash || '#home').slice(1), false);
     ticking = false;
     const rect = hero.getBoundingClientRect();
     const progress = Math.max(0, Math.min(1, -rect.top / (rect.height || 1)));
-    door.style.transform = 'translateY(' + (progress * 110) + 'px)';
+    door.style.transform = 'translate3d(0,' + (progress * 110) + 'px,0)';
   }
   window.addEventListener('scroll', () => { if (!ticking) { requestAnimationFrame(update); ticking = true; } }, { passive: true });
   update();
@@ -1630,15 +1652,15 @@ function toggleFaq(btn) {
 
     // Background moves slower than scroll (depth parallax)
     const bgTravel = heroHeight * 0.32;
-    bg.style.transform = 'translateY(' + (progress * bgTravel) + 'px)';
+    bg.style.transform = 'translate3d(0,' + (progress * bgTravel) + 'px,0)';
 
     // Glow drifts a little faster than the photo, so the two separate
-    if (glow) glow.style.transform = 'translateY(' + (progress * heroHeight * 0.12) + 'px)';
+    if (glow) glow.style.transform = 'translate3d(0,' + (progress * heroHeight * 0.12) + 'px,0)';
 
     // Text lines lift up at increasing speeds and fade as the hero leaves
     layers.forEach(el => {
       const depth = parseFloat(el.dataset.depth) || 0;
-      el.style.transform = 'translateY(' + (-progress * heroHeight * depth) + 'px)';
+      el.style.transform = 'translate3d(0,' + (-progress * heroHeight * depth) + 'px,0)';
       el.style.opacity = String(Math.max(0, 1 - progress * 1.6));
     });
   }
