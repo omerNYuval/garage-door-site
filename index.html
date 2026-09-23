@@ -520,6 +520,18 @@ body {
 .svc-item strong { font-size:.98rem; color:#f4efe2; margin-top:.4rem; }
 .svc-item > span:last-child { font-size:.82rem; color:var(--ink-soft); }
 .svc-icon svg { width:1.9rem; height:1.9rem; fill:none; stroke:#d4af37; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; }
+.svc-toggle-arrow { display:inline-block; transition:transform .3s ease; }
+.svc-toggle[aria-expanded="true"] .svc-toggle-arrow { transform:rotate(180deg); }
+.svc-more .svc-row { margin-top:1rem; }
+.svc-more.open .svc-item { animation:svc-in .45s cubic-bezier(.22,.61,.36,1) both; }
+.svc-more.open .svc-item:nth-child(2) { animation-delay:.06s; }
+.svc-more.open .svc-item:nth-child(3) { animation-delay:.12s; }
+.svc-more.open .svc-item:nth-child(4) { animation-delay:.18s; }
+.svc-more.open .svc-item:nth-child(5) { animation-delay:.24s; }
+@keyframes svc-in { from { opacity:0; transform:translateY(18px); } to { opacity:1; transform:none; } }
+.svc-all { margin:1.4rem 0 0; }
+.svc-all-link { background:none; border:none; padding:0; font:inherit; font-weight:600; color:#d4af37; cursor:pointer; }
+.svc-all-link:hover { text-decoration:underline; }
 /* Home: how it works */
 .how-row { display:grid; grid-template-columns:repeat(3,1fr); gap:var(--gap); margin-top:2.5rem; position:relative; }
 .how-row::before { content:""; position:absolute; top:1.6rem; left:1.6rem; right:1.6rem; height:1px; background:linear-gradient(90deg, #d4af37, rgba(212,175,55,.15)); }
@@ -596,7 +608,7 @@ body {
           <p class="eyebrow">What we fix</p>
           <h2 style="font-size:clamp(1.6rem,3.4vw,2.3rem); margin-top:.5rem;">Every part of your garage door</h2>
         </div>
-        <button class="btn btn-ghost" onclick="showView('services')">All services →</button>
+        <button class="btn btn-ghost svc-toggle" id="svcToggle" aria-expanded="false" aria-controls="svcMore" onclick="toggleMoreServices()"><span class="svc-toggle-label">More services</span> <span class="svc-toggle-arrow">↓</span></button>
       </div>
       <div class="svc-row">
         <button class="svc-item" onclick="showView('services')"><span class="svc-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg></span><strong>Emergency repair</strong><span>Stuck, off-track or won't close</span></button>
@@ -604,6 +616,17 @@ body {
         <button class="svc-item" onclick="showView('services')"><span class="svc-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="7" width="18" height="10" rx="2"/><path d="M7 12h4M16 12h1"/></svg></span><strong>Openers</strong><span>Repair, replace, smart openers</span></button>
         <button class="svc-item" onclick="showView('services')"><span class="svc-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 21V9l9-6 9 6v12"/><path d="M7 21v-8h10v8M7 16h10"/></svg></span><strong>New installation</strong><span>New doors, fitted and finished</span></button>
         <button class="svc-item" onclick="showView('services')"><span class="svc-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.5-2.5z"/></svg></span><strong>Tune-up</strong><span>Rollers, tracks, safety check</span></button>
+      </div>
+      <!-- extra services, revealed by the More services button -->
+      <div class="svc-more" id="svcMore" hidden>
+        <div class="svc-row">
+        <button class="svc-item" onclick="showView('services')"><span class="svc-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V8l8-5 8 5v12"/><path d="M8 20v-7l8 3v4"/></svg></span><strong>Off-track doors</strong><span>Door jumped its track or hangs crooked</span></button>
+        <button class="svc-item" onclick="showView('services')"><span class="svc-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="1"/><path d="M4 9.5h16M4 14.5h16"/><path d="M13 12l2-1"/></svg></span><strong>Panel replacement</strong><span>Dented or cracked sections swapped out</span></button>
+        <button class="svc-item" onclick="showView('services')"><span class="svc-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3c3 4 5 6.5 5 9.5a5 5 0 0 1-10 0C7 9.5 9 7 12 3z"/></svg></span><strong>Weather seals</strong><span>New bottom seal and weatherstripping</span></button>
+        <button class="svc-item" onclick="showView('services')"><span class="svc-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="3" width="10" height="18" rx="2"/><circle cx="12" cy="8" r="1.4"/><path d="M10 13h4M10 16.5h4"/></svg></span><strong>Remotes &amp; keypads</strong><span>Program remotes, keypads and car buttons</span></button>
+        <button class="svc-item" onclick="showView('services')"><span class="svc-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5a10 10 0 0 1 14 0M8 15.5a6 6 0 0 1 8 0"/><circle cx="12" cy="19" r="1.2"/></svg></span><strong>Smart openers</strong><span>Open and monitor your door from your phone</span></button>
+        </div>
+        <p class="svc-all"><button class="svc-all-link" onclick="showView('services')">See full details on the Services page →</button></p>
       </div>
     </div>
   </section>
@@ -897,6 +920,17 @@ function initReveal() {
 document.getElementById('yr').textContent = new Date().getFullYear();
 // restore the view from the URL hash on load / refresh (also runs initReveal)
 showView((location.hash || '#home').slice(1), false);
+
+/* Home services strip: show / hide the second row */
+function toggleMoreServices() {
+  const more = document.getElementById('svcMore');
+  const btn = document.getElementById('svcToggle');
+  const open = more.hidden;
+  more.hidden = !open;
+  more.classList.toggle('open', open);
+  btn.setAttribute('aria-expanded', String(open));
+  btn.querySelector('.svc-toggle-label').textContent = open ? 'Show less' : 'More services';
+}
 
 function toggleFaq(btn) {
   const item = btn.closest('.faq-item');
