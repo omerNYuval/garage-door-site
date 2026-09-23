@@ -663,6 +663,26 @@ body {
 .flip-icon svg { width:1.5rem; height:1.5rem; fill:none; stroke:#d4af37; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
 .hint-tap { display:none; }
 @media (hover: none) { .hint-hover { display:none; } .hint-tap { display:inline; } }
+/* FAQ: pinned-notes board, spread across the full width (5 on top, 4 below) */
+#faqScatter.faq-scatter { max-width:none; gap:2.4rem 1rem; justify-content:space-evenly; padding-top:2.5rem; }
+#faqScatter .flip-card { width:11.8rem; height:11.8rem; }
+#faqScatter .flip-card:nth-child(1).in-view { transform:rotate(-5deg); }
+#faqScatter .flip-card:nth-child(2) { margin-top:3rem; }
+#faqScatter .flip-card:nth-child(2).in-view { transform:rotate(3deg); }
+#faqScatter .flip-card:nth-child(3).in-view { transform:rotate(-2deg); }
+#faqScatter .flip-card:nth-child(4) { margin-top:3rem; }
+#faqScatter .flip-card:nth-child(4).in-view { transform:rotate(4deg); }
+#faqScatter .flip-card:nth-child(5).in-view { transform:rotate(-3.5deg); }
+#faqScatter .flip-card:nth-child(6).in-view { transform:rotate(2.5deg); }
+#faqScatter .flip-card:nth-child(7) { margin-top:3rem; }
+#faqScatter .flip-card:nth-child(7).in-view { transform:rotate(-4deg); }
+#faqScatter .flip-card:nth-child(8).in-view { transform:rotate(3.5deg); }
+#faqScatter .flip-card:nth-child(9) { margin-top:3rem; }
+#faqScatter .flip-card:nth-child(9).in-view { transform:rotate(-2.5deg); }
+#faqScatter .flip-front { box-shadow:0 24px 40px -18px rgba(0,0,0,.9); }
+#faqScatter .flip-card-inner::before { content:""; position:absolute; top:-.55rem; left:50%; width:1.1rem; height:1.1rem; margin-left:-.55rem; border-radius:50%; background:radial-gradient(circle at 35% 35%, #f3dc8a, #a8812a); box-shadow:0 3px 6px rgba(0,0,0,.6); z-index:3; transition:opacity .2s ease; }
+#faqScatter .flip-card:hover .flip-card-inner::before, #faqScatter .flip-card.flipped .flip-card-inner::before { opacity:0; }
+@media (max-width:760px){ #faqScatter .flip-card:nth-child(n){ margin-top:0; } }
 .faq-art { max-width:11rem; }
 .faq-dot { fill:#d4af37; opacity:0; animation:glow-in .4s ease 1.2s forwards; }
 
