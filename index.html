@@ -681,12 +681,14 @@ body {
 #view-contact .field.invalid input, #view-contact .field.invalid select { border-color:#c9573f; }
 .urgency { border:0; padding:0; margin:0 0 1.1rem; }
 .urgency legend { margin-bottom:.45rem; }
-.seg { display:grid; grid-template-columns:repeat(3,1fr); gap:.5rem; }
+.seg { display:grid; grid-template-columns:repeat(4,1fr); gap:.5rem; }
+@media (max-width:560px){ .seg{ grid-template-columns:1fr 1fr; } }
 .seg label { position:relative; cursor:pointer; }
 .seg input { position:absolute; opacity:0; }
 .seg span { display:block; text-align:center; padding:.65rem .5rem; border-radius:6px; border:1px solid rgba(212,175,55,.25); color:var(--ink-soft); font-size:.88rem; font-weight:600; transition:all .2s ease; }
 .seg label:hover span { border-color:rgba(212,175,55,.6); color:#f4efe2; }
 .seg input:checked + span { background:var(--gold-grad); color:#0b0b0c; border-color:transparent; }
+.seg input[value="today-asap"]:checked + span { background:linear-gradient(135deg,#f0b35a,#d4832c); color:#0b0b0c; }
 .seg input[value="emergency"]:checked + span { background:linear-gradient(135deg,#e0785e,#b8432c); color:#fff; }
 .seg input:focus-visible + span { outline:2px solid #d4af37; outline-offset:2px; }
 .submit-btn { width:100%; padding:1rem; font-size:1rem; }
@@ -1228,6 +1230,7 @@ body {
             <legend>How soon do you need us?</legend>
             <div class="seg">
               <label><input type="radio" name="urgency" value="emergency"><span>Emergency</span></label>
+              <label><input type="radio" name="urgency" value="today-asap"><span>Today, ASAP</span></label>
               <label><input type="radio" name="urgency" value="this-week" checked><span>This week</span></label>
               <label><input type="radio" name="urgency" value="just-a-quote"><span>Just a quote</span></label>
             </div>
