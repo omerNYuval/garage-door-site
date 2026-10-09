@@ -1,0 +1,116 @@
+/* Shared styles for the unlinked guide pages under /guides/ — matches the
+   site's real black-and-gold theme (see index.html's own "Site-wide black &
+   gold theme" block), kept in one file since the three guide pages share
+   the exact same structure. */
+
+:root {
+  --charcoal: #0b0b0c;
+  --charcoal-raised: #151517;
+  --concrete: #f4efe2;
+  --ink: #f4efe2;
+  --ink-soft: rgba(244,239,226,.68);
+  --paper: #0b0b0c;
+  --amber: #d4af37;
+  --amber-dim: #a9701f;
+  --line: rgba(212,175,55,.18);
+  --gold-grad: linear-gradient(135deg, #f3dc8a 0%, #d4af37 45%, #a8812a 100%);
+  --font-head: "Archivo", "Heebo", "Arial Narrow", sans-serif;
+  --font-body: "Inter", "Heebo", "Helvetica Neue", Arial, sans-serif;
+  --maxw: 48rem;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin:0; font-family: var(--font-body); color: var(--ink); background: var(--paper); line-height:1.6; -webkit-font-smoothing:antialiased; }
+h1,h2,h3 { font-family: var(--font-head); font-weight:800; line-height:1.15; letter-spacing:-0.01em; margin:0 0 .6rem; }
+p { margin:0 0 1rem; max-width:62ch; color: var(--ink-soft); }
+a { color: var(--amber); text-decoration:none; }
+a:hover { text-decoration:underline; }
+ul { margin:0; padding:0; }
+.wrap { max-width: var(--maxw); margin:0 auto; padding:0 clamp(1.25rem,4vw,2.5rem); }
+section { padding: clamp(2.25rem,6vw,4rem) 0; }
+.eyebrow { font-size:.8rem; font-weight:700; color: var(--amber); letter-spacing:.03em; text-transform:uppercase; }
+
+/* nav */
+.site-nav { position:sticky; top:0; z-index:40; background:rgba(11,11,12,.92); -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px); border-bottom:1px solid var(--line); }
+.site-nav .wrap { display:flex; align-items:center; justify-content:space-between; padding:1rem clamp(1.25rem,4vw,2.5rem); max-width: 70rem; }
+.brand { font-family:var(--font-head); font-weight:800; font-size:1.05rem; display:flex; align-items:center; gap:.55rem; color: var(--ink); }
+.brand-mark { width:1.65rem; height:1.65rem; flex:none; border-radius:3px; background:linear-gradient(180deg, #1a1a1c 0 70%, #d4af37 70% 100%); }
+.nav-cta { font-weight:700; font-size:.88rem; background: var(--gold-grad); color:#0b0b0c; padding:.55rem 1.05rem; border-radius:3px; white-space:nowrap; transition:filter .2s ease; }
+.nav-cta:hover { filter:brightness(1.08); text-decoration:none; }
+
+/* hero */
+.guide-hero { padding: clamp(2.5rem,7vw,4.5rem) 0 clamp(1.5rem,4vw,2rem); }
+.guide-hero h1 { font-size: clamp(1.9rem,4.2vw,2.7rem); margin-top:.5rem; }
+.guide-hero .lede { font-size:1.05rem; margin-top:1rem; }
+
+/* cards */
+.card { padding:1.6rem 1.5rem; background:#d7d6d0; border:1px solid #bdbbb3; border-radius:4px; color:#1c1b19; }
+.card h2, .card h3 { color:#111110; }
+.card p { color:#3a3935; }
+.card.short-answer { border-left:4px solid var(--amber); }
+.card.short-answer .eyebrow { color: var(--amber-dim); }
+.card.short-answer p { margin-bottom:0; font-size:1.02rem; }
+
+/* stat tiles */
+.stat-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(9.5rem,1fr)); gap:1rem; margin-top:1.25rem; }
+.stat-card { text-align:left; }
+.stat-num { font-family:var(--font-head); font-weight:800; font-size:clamp(1.5rem,3vw,2rem); line-height:1; color:#0b0b0c; }
+.stat-label { margin-top:.4rem; font-size:.84rem; color:#4a4943; max-width:none; }
+
+/* interactive estimate tool */
+.estimate-tool { margin-top:1.5rem; }
+.estimate-tool label { display:block; font-weight:600; color:var(--ink); margin-bottom:.5rem; }
+input[type=range] { width:100%; accent-color:#d4af37; }
+.estimate-result { margin-top:.9rem; font-family:var(--font-head); font-weight:800; font-size:1.35rem; color:var(--amber); }
+.estimate-note { font-size:.78rem; color:var(--ink-soft); opacity:.75; margin-top:.5rem; max-width:none; }
+
+/* content lists */
+.content-list { margin:1rem 0 1.25rem; padding-left:1.15rem; }
+.content-list li { margin-bottom:.65rem; color:var(--ink-soft); max-width:62ch; }
+.content-list strong { color:var(--ink); }
+
+/* symptoms table */
+.table-wrap { overflow-x:auto; margin-top:1.5rem; border-radius:4px; }
+table.guide-table { width:100%; border-collapse:collapse; min-width:34rem; background:var(--charcoal-raised); border:1px solid var(--line); }
+table.guide-table th, table.guide-table td { text-align:left; padding:.75rem .9rem; border-bottom:1px solid var(--line); font-size:.86rem; vertical-align:top; }
+table.guide-table th { font-family:var(--font-head); color:var(--amber); font-weight:700; background:#1a1a1c; }
+table.guide-table td { color:var(--ink-soft); }
+table.guide-table tr:last-child td { border-bottom:none; }
+
+/* callout (stop-and-call warning) */
+.callout-warn { margin-top:1.5rem; padding:1.1rem 1.3rem; border:1px solid rgba(212,175,55,.4); border-left:4px solid var(--amber); border-radius:4px; background:var(--charcoal-raised); }
+.callout-warn p { margin:0; color:var(--ink); max-width:none; }
+
+/* FAQ */
+.faq-list { margin-top:1.5rem; border-top:1px solid var(--line); }
+.faq-item { padding:1.25rem 0; border-bottom:1px solid var(--line); }
+.faq-item h3 { font-size:1.02rem; margin-bottom:.4rem; }
+.faq-item p { margin:0; }
+
+/* CTA band */
+.cta-band { padding:clamp(2rem,5vw,3.25rem) 0; background: var(--gold-grad); margin-top:.5rem; }
+.cta-band .wrap { max-width:70rem; }
+.cta-inner { display:flex; justify-content:space-between; align-items:center; gap:1.25rem; flex-wrap:wrap; }
+.cta-inner h2 { color:#0b0b0c; font-size:clamp(1.3rem,3vw,1.7rem); }
+.cta-inner p { color:#2a2310; margin-top:.3rem; font-size:.95rem; max-width:40ch; }
+.cta-btn { background:#0b0b0c; color:#f3dc8a; padding:1rem 1.6rem; border-radius:3px; font-weight:700; display:inline-block; transition:background .2s ease; }
+.cta-btn:hover { background:#1a1916; text-decoration:none; }
+.sample-tag { display:inline-block; margin-top:.7rem; font-size:.72rem; font-weight:700; letter-spacing:.03em; color:#2a2310; border:1px dashed rgba(11,11,12,.35); border-radius:999px; padding:.3rem .7rem; }
+
+/* related + footer */
+.related-section { border-top:1px solid var(--line); }
+.related-list { list-style:none; margin:1rem 0 0; display:flex; flex-direction:column; gap:.6rem; }
+.related-list a { font-weight:600; }
+.related-list a::before { content:"\2192\0020"; color:var(--amber); }
+
+.site-footer { background:#0b0b0c; border-top:1px solid rgba(212,175,55,.22); color:rgba(238,236,230,.7); padding:2.25rem 0; font-size:.85rem; }
+.site-footer .wrap { max-width:70rem; display:flex; justify-content:space-between; flex-wrap:wrap; gap:1rem; align-items:center; }
+
+.float-call { position:fixed; bottom:1.4rem; right:1.4rem; z-index:50; background: var(--gold-grad); color:#0b0b0c; font-weight:700; font-size:.9rem; padding:.8rem 1.15rem; border-radius:30px; box-shadow:0 10px 24px -10px rgba(0,0,0,.45); display:flex; align-items:center; gap:.5rem; transition:transform .2s ease; }
+.float-call:hover { transform:translateY(-2px); text-decoration:none; }
+
+@media (max-width:760px) {
+  .nav-cta { display:none; }
+  .cta-inner { flex-direction:column; align-items:stretch; text-align:left; }
+  .cta-btn { width:100%; text-align:center; }
+}
