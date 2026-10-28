@@ -1523,11 +1523,10 @@ const BUSINESS = {
   name: 'Garage Master',     // business name (used for Google local-business markup)
   phone: '',                 // TODO: real number in +1XXXXXXXXXX format, e.g. '+13175550123'
   phoneDisplay: '',          // TODO: how it should look, e.g. '(317) 555-0123'
-  formEndpoint: 'https://api.web3forms.com/submit', // Web3Forms: free, no submission cap
-  // TODO: get a free key at https://web3forms.com (just enter the inbox that should
-  // receive quote requests, no account needed) and paste it here -- Web3Forms always
-  // emails whichever inbox is tied to this key, there's no separate "send to" field.
-  web3formsAccessKey: '',
+  formEndpoint: 'https://api.web3forms.com/submit', // Web3Forms free plan: 250 submissions/mo
+  // Public key, safe in client-side code -- Web3Forms always emails whichever inbox
+  // is tied to this key, there's no separate "send to" field to configure.
+  web3formsAccessKey: '336d46e5-3ba1-4517-b6ba-0628b0f58404',
   // SAMPLE hours, to be confirmed. [open, close] in 24h, null = closed. 0 = Sunday
   hours: { 0: null, 1: [7, 19], 2: [7, 19], 3: [7, 19], 4: [7, 19], 5: [7, 19], 6: [8, 16] },
   hoursConfirmed: false
