@@ -1523,7 +1523,11 @@ const BUSINESS = {
   name: 'Garage Master',     // business name (used for Google local-business markup)
   phone: '',                 // TODO: real number in +1XXXXXXXXXX format, e.g. '+13175550123'
   phoneDisplay: '',          // TODO: how it should look, e.g. '(317) 555-0123'
-  formEndpoint: '',          // TODO: Formspree / Web3Forms URL that emails requests to the owner
+  formEndpoint: 'https://api.web3forms.com/submit', // Web3Forms: free, no submission cap
+  // TODO: get a free key at https://web3forms.com (just enter the inbox that should
+  // receive quote requests, no account needed) and paste it here -- Web3Forms always
+  // emails whichever inbox is tied to this key, there's no separate "send to" field.
+  web3formsAccessKey: '',
   // SAMPLE hours, to be confirmed. [open, close] in 24h, null = closed. 0 = Sunday
   hours: { 0: null, 1: [7, 19], 2: [7, 19], 3: [7, 19], 4: [7, 19], 5: [7, 19], 6: [8, 16] },
   hoursConfirmed: false
@@ -1606,15 +1610,23 @@ function bookService(value) {
       if (bad) ok = false;
     });
     if (!ok) { err.textContent = 'Please fill in your name, phone and the service you need.'; return; }
-    if (!BUSINESS.formEndpoint) {
+    if (!BUSINESS.formEndpoint || !BUSINESS.web3formsAccessKey) {
       err.textContent = 'Online requests aren\'t switched on yet. Please call or text us for now.';
       return;
     }
     const btn = form.querySelector('.submit-btn');
     btn.disabled = true; btn.textContent = 'Sending…';
     try {
-      const res = await fetch(BUSINESS.formEndpoint, { method: 'POST', headers: { 'Accept': 'application/json' }, body: new FormData(form) });
-      if (!res.ok) throw new Error('bad status');
+      const data = new FormData(form);
+      data.set('access_key', BUSINESS.web3formsAccessKey);
+      data.set('subject', 'New quote request from ' + (data.get('name') || 'the website'));
+      data.set('from_name', (BUSINESS.name || 'Garage door site') + ' — quote form');
+      const res = await fetch(BUSINESS.formEndpoint, { method: 'POST', headers: { 'Accept': 'application/json' }, body: data });
+      // Web3Forms can answer 200 OK with { success:false } (e.g. a bad access key),
+      // so the HTTP status alone isn't enough -- check the body or a lead silently
+      // never arrives with no error shown.
+      const json = await res.json().catch(() => null);
+      if (!res.ok || !json || json.success !== true) throw new Error('bad status');
       form.hidden = true; done.hidden = false;
     } catch (_) {
       err.textContent = 'Something went wrong sending your request. Please call or text us instead.';
