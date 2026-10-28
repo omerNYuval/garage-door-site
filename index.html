@@ -879,6 +879,14 @@ body {
 .line-art .soft { stroke-opacity:.5; }
 .line-art .hi { stroke:#f3dc8a; }
 .feature-row:hover .line-art { transform:scale(1.03); transition:transform .8s ease; }
+/* Phone vs call-back mode: until BUSINESS.phone is set, all call buttons become "call me back" */
+html:not(.has-phone) [data-phone-only] { display:none !important; }
+html.has-phone [data-nophone-only] { display:none !important; }
+.callback-lead { color:var(--ink-soft); margin:0; }
+.callback-lead strong { color:#f3dc8a; }
+.callback-steps { list-style:none; padding:0; margin:.3rem 0 0; display:grid; gap:.6rem; }
+.callback-steps li { display:flex; align-items:center; gap:.7rem; color:#f4efe2; font-size:.95rem; }
+.callback-steps span { flex:none; width:1.8rem; height:1.8rem; border-radius:50%; display:grid; place-items:center; background:var(--gold-grad); color:#0b0b0c; font-weight:800; font-size:.85rem; }
 </style>
 </head>
 <body>
@@ -898,9 +906,10 @@ body {
       <button data-view="services" onclick="showView('services')">Services</button>
       <button data-view="faq" onclick="showView('faq')">FAQ</button>
       <button data-view="contact" onclick="showView('contact')">Contact</button>
-      <a class="nav-menu-call" data-phone-link href="tel:+10000000000">Call now</a>
+      <a class="nav-menu-call" data-phone-only data-phone-link href="tel:+10000000000">Call now</a>
+      <a class="nav-menu-call" data-nophone-only href="#contact" onclick="showView('contact');return false;">Get a call back</a>
     </div>
-    <a class="nav-cta" href="#" onclick="showView('contact');return false;">Call for service</a>
+    <a class="nav-cta" href="#contact" onclick="showView('contact');return false;"><span data-phone-only>Call for service</span><span data-nophone-only>Get a call back</span></a>
     <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks" onclick="toggleNav()"><span></span><span></span><span></span></button>
   </div>
 </nav>
@@ -982,7 +991,7 @@ body {
       <p class="eyebrow">How it works</p>
       <h2 style="font-size:clamp(1.6rem,3.4vw,2.3rem); margin-top:.5rem;">Three simple steps</h2>
       <div class="how-row">
-        <div class="how-step"><span class="how-num">01</span><h3>Reach out</h3><p>Call or send a request and tell us what's happening. We'll set up a time that works for you.</p></div>
+        <div class="how-step"><span class="how-num">01</span><h3>Leave your details</h3><p>Tell us what's happening and we'll call you back within 5–10 minutes to set up a time.</p></div>
         <div class="how-step"><span class="how-num">02</span><h3>We diagnose it</h3><p>A technician inspects the whole door system, finds the cause and walks you through your options.</p></div>
         <div class="how-step"><span class="how-num">03</span><h3>Back in working order</h3><p>We fix it, test everything, and make sure the door runs smoothly and safely before we leave.</p></div>
       </div>
@@ -1145,7 +1154,7 @@ body {
         <h2>Not sure what you need?</h2>
         <p>Describe what your door is doing and we'll tell you what it likely needs.</p>
       </div>
-      <button class="btn cta-btn" onclick="showView('contact')">Call or send a request</button>
+      <button class="btn cta-btn" onclick="showView('contact')">Get a call back</button>
     </div>
   </section>
 </div>
@@ -1300,7 +1309,7 @@ body {
     <div class="wrap reveal cta-inner">
       <div>
         <h2>Didn't find your answer?</h2>
-        <p>Call or message us. You'll get a straight answer, never a sales pitch.</p>
+        <p>Leave your details and we'll call you back with a straight answer, never a sales pitch.</p>
       </div>
       <button class="btn cta-btn" onclick="showView('contact')">Ask us anything</button>
     </div>
@@ -1315,7 +1324,7 @@ body {
       <div>
         <p class="eyebrow">Contact</p>
         <h1>Let's get your door working again</h1>
-        <p class="lede">Call us for anything urgent, or send a request and we'll get back to you with a time and a clear price.</p>
+        <p class="lede">Leave your details and we'll call you back within 5–10 minutes during business hours, with a time and a clear price.</p>
       </div>
       <div class="svc-hero-art">
         <svg class="door-art contact-art" viewBox="0 0 200 200" role="img" aria-label="Phone illustration">
@@ -1334,22 +1343,31 @@ body {
     <div class="wrap contact-layout">
       <!-- Path 1: urgent, call -->
       <aside class="call-card reveal">
-        <p class="eyebrow">Need help now?</p>
-        <h2>Call us</h2>
-        <a class="call-number" data-phone-link href="tel:+10000000000"><span class="call-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3.5h3.2l1.6 4.2-2.1 1.4a11 11 0 0 0 7.2 7.2l1.4-2.1 4.2 1.6V19a2 2 0 0 1-2 2A16.5 16.5 0 0 1 3 5.5a2 2 0 0 1 2-2z"/></svg></span><span data-phone-text>(000) 000-0000</span></a>
+        <p class="eyebrow" data-phone-only>Need help now?</p>
+        <h2 data-phone-only>Call us</h2>
+        <p class="eyebrow" data-nophone-only>Fast response</p>
+        <h2 data-nophone-only>We'll call you back</h2>
+        <p class="callback-lead" data-nophone-only>Leave your details in the form and a technician will call you back within <strong>5–10 minutes</strong> during business hours.</p>
+        <ol class="callback-steps" data-nophone-only>
+          <li><span>1</span>Fill in your name, phone and what's wrong</li>
+          <li><span>2</span>We call you back within 5–10 minutes</li>
+          <li><span>3</span>We set a time and give you a clear price</li>
+        </ol>
+        <a class="call-number" data-phone-only data-phone-link href="tel:+10000000000"><span class="call-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3.5h3.2l1.6 4.2-2.1 1.4a11 11 0 0 0 7.2 7.2l1.4-2.1 4.2 1.6V19a2 2 0 0 1-2 2A16.5 16.5 0 0 1 3 5.5a2 2 0 0 1 2-2z"/></svg></span><span data-phone-text>(000) 000-0000</span></a>
         <!-- TODO: set the real phone number in BUSINESS.phone (script at the bottom) -->
-        <span class="sample-tag" data-phone-sample>Sample number: real one coming soon</span>
+        <span class="sample-tag" data-phone-only data-phone-sample>Sample number: real one coming soon</span>
         <div class="open-status" id="openStatus"><span class="dot"></span><span class="label">Checking hours…</span></div>
         <ul class="hours" id="hoursList"></ul>
         <span class="sample-tag" data-hours-sample>Sample hours: to be confirmed</span>
-        <a class="btn btn-ghost text-btn" data-sms-link href="sms:+10000000000"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 10h8M8 13h5"/></svg> Send a text instead</a>
-        <p class="call-note">Door stuck open or a broken spring? Call rather than filling out the form. Urgent jobs go to the front of the line.</p>
+        <a class="btn btn-ghost text-btn" data-phone-only data-sms-link href="sms:+10000000000"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 10h8M8 13h5"/></svg> Send a text instead</a>
+        <p class="call-note" data-phone-only>Door stuck open or a broken spring? Call rather than filling out the form. Urgent jobs go to the front of the line.</p>
+        <p class="call-note" data-nophone-only>Door stuck open or a broken spring? Choose <strong>Emergency</strong> in the form and we'll call you first.</p>
       </aside>
 
       <!-- Path 2: not urgent, request a quote -->
       <div class="form-card reveal">
-        <p class="eyebrow">Not urgent?</p>
-        <h2>Request a free quote</h2>
+        <p class="eyebrow">Leave your details</p>
+        <h2>Request a call back</h2>
         <form id="quoteForm" novalidate>
           <div class="form-row">
             <div class="field"><label for="qName">Name</label><input id="qName" name="name" type="text" autocomplete="name" required placeholder="Your name"></div>
@@ -1369,13 +1387,13 @@ body {
             </div>
           </fieldset>
           <div class="field"><label for="qMsg">What's going on with your door?</label><textarea id="qMsg" name="message" rows="4" placeholder="For example: the door opens halfway and stops, and there's a loud bang from above."></textarea></div>
-          <button class="btn btn-primary submit-btn" type="submit">Send request</button>
+          <button class="btn btn-primary submit-btn" type="submit">Call me back</button>
           <p class="form-error" id="formError" role="alert"></p>
         </form>
         <div class="form-done" id="formDone" hidden>
           <svg class="done-check" viewBox="0 0 52 52" aria-hidden="true"><circle cx="26" cy="26" r="24"/><path d="M15 27l7 7 15-16"/></svg>
           <h3>Request sent</h3>
-          <p>Thanks! We'll get back to you shortly to set up a time.</p>
+          <p>Thanks! We'll call you within 5–10 minutes during business hours.</p>
         </div>
       </div>
     </div>
@@ -1389,10 +1407,12 @@ body {
   </div>
 </footer>
 
-<a class="float-call" href="tel:+10000000000">📞 Call now</a>
+<a class="float-call" data-phone-only href="tel:+10000000000">📞 Call now</a>
+<a class="float-call" data-nophone-only href="#contact" onclick="showView('contact');return false;">Get a call back</a>
 <div class="mobile-bar" aria-label="Quick actions">
-  <a class="mb-call" data-phone-link href="tel:+10000000000">📞 Call</a>
-  <button class="mb-quote" onclick="showView('contact')">Quote</button>
+  <a class="mb-call" data-phone-only data-phone-link href="tel:+10000000000">📞 Call</a>
+  <a class="mb-call" data-nophone-only href="#contact" onclick="showView('contact');return false;">Call me back</a>
+  <button class="mb-quote" data-phone-only onclick="showView('contact')">Quote</button>
 </div>
 
 <script>
@@ -1532,6 +1552,7 @@ const BUSINESS = {
   hoursConfirmed: false
 };
 (function applyBusinessDetails() {
+  document.documentElement.classList.toggle('has-phone', !!BUSINESS.phone);
   const tel = BUSINESS.phone || '+10000000000';
   document.querySelectorAll('a[href^="tel:"], [data-phone-link]').forEach(a => a.setAttribute('href', 'tel:' + tel));
   document.querySelectorAll('[data-sms-link]').forEach(a => a.setAttribute('href', 'sms:' + tel));
@@ -1558,7 +1579,7 @@ const BUSINESS = {
   }
   // "Call for service" in the nav dials directly on phones
   const navCta = document.querySelector('.nav-cta');
-  if (navCta && window.matchMedia('(hover: none)').matches) { navCta.setAttribute('href', 'tel:' + tel); navCta.removeAttribute('onclick'); }
+  if (navCta && BUSINESS.phone && window.matchMedia('(hover: none)').matches) { navCta.setAttribute('href', 'tel:' + tel); navCta.removeAttribute('onclick'); }
 
   // hours list + open/closed badge
   const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
@@ -1610,7 +1631,7 @@ function bookService(value) {
     });
     if (!ok) { err.textContent = 'Please fill in your name, phone and the service you need.'; return; }
     if (!BUSINESS.formEndpoint || !BUSINESS.web3formsAccessKey) {
-      err.textContent = 'Online requests aren\'t switched on yet. Please call or text us for now.';
+      err.textContent = 'Sorry, online requests aren\'t switched on yet. Please try again a little later.';
       return;
     }
     const btn = form.querySelector('.submit-btn');
@@ -1628,8 +1649,8 @@ function bookService(value) {
       if (!res.ok || !json || json.success !== true) throw new Error('bad status');
       form.hidden = true; done.hidden = false;
     } catch (_) {
-      err.textContent = 'Something went wrong sending your request. Please call or text us instead.';
-      btn.disabled = false; btn.textContent = 'Send request';
+      err.textContent = 'Something went wrong sending your request. Please check your connection and try again.';
+      btn.disabled = false; btn.textContent = 'Call me back';
     }
   });
 })();
